@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BookAddComponent } from "../book-add/book-add.component";
+import { Book } from '../model/book';
 
 @Component({
   selector: 'app-books-list',
@@ -11,16 +12,22 @@ import { BookAddComponent } from "../book-add/book-add.component";
 export class BooksListComponent {
   title="Listes des livres";
   books = [
-    {id : 1, title : "2014", author : "Ramos", price : 10},
-    {id : 2, title : "2016", author : "Zidane", price : 11},
-    {id : 3, title : "2017", author : "Ronaldo", price : 12},
-    {id : 4, title : "2018", author : "Bale", price : 13},
-    {id : 5, title : "2022", author : "Benzema", price : 14},
-    {id : 6, title : "2024", author : "Ancelotti", price : 15}
-];
+    new Book(1,"Inverting the Pyramid","Jonathan Wilson",14),
+    new Book(2,"I Am Zlatan Ibrahimović","Zlatan Ibrahimović",12),
+    new Book(3,"I Think Therefore I Play","Andrea Pirlo",13),
+    new Book(4,"Commitment: My Autobiography","Didier Drogba",15),
+    new Book(5,"Mein Kampf","Adolf Hitler",19)
+  ];
   action="";
-  changeAction(action:string)
+  selectedBook?: Book;
+  changeAction(action:string, book?:Book)
   {
     this.action=action;
+    this.selectedBook=book;
+  }
+  addBook(book:Book)
+  {
+    this.books=[...this.books,book];
+    this.changeAction("");
   }
 }

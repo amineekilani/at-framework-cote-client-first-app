@@ -1,24 +1,20 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Output, input } from '@angular/core';
 import {BooksListComponent} from '../books-list/books-list.component';
+import { Book } from '../model/book';
 @Component({
   selector: 'app-book-add',
   standalone: true,
-  imports: [BooksListComponent],
+//  imports: [BooksListComponent],
   templateUrl: './book-add.component.html',
   styleUrl: './book-add.component.css'
 })
 export class BookAddComponent {
-  @Input() lastId=0;
+  readonly lastId = input<number>(undefined);
+  @Output() bookCreated=new EventEmitter<Book>();
   addBook(title:string, author:string, price:number)
   {
-    const newBook=
-    {
-      //id : Math.floor(Math.random()*1000),
-      id : this.lastId+1,
-      title : title,
-      author : author,
-      price : price
-    };
-    console.log(newBook)
+    const newBook=new Book(this.lastId()+1, title, author, price);
+    this.bookCreated.emit(newBook);
+    console.log(newBook);
   }
 }

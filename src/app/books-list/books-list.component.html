@@ -1,11 +1,8 @@
-<!-- 1er type de binding : interpolation -->
 <h2>{{title}}</h2>
-<!-- 2ème type : event binding -->
 <button class="btn btn-success mb-3" (click)="changeAction('add')">Ajouter un livre</button>
-<!-- Affichage conditionnel @if -->
 @if (action==="add")
 {
-  <app-book-add [lastId]="books[books.length-1].id"></app-book-add>
+  <app-book-add [lastId]="books[books.length-1].id" (bookCreated)="addBook($event)"></app-book-add>
 }
 <table class="table table-striped">
     <thead>
