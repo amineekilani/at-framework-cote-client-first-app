@@ -1,0 +1,16 @@
+<h2>Editer le livre {{book?.title}}</h2>
+<form id="addForm" class="hide">
+    <div class="mb-3">
+        <label class="form-label">Titre</label>
+        <input type="text" class="form-control" id="title" name="title" [(ngModel)]="book!.title">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Auteur</label>
+        <input type="text" class="form-control" id="author" name="author" [(ngModel)]="book!.author">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Prix</label>
+        <input type="text" class="form-control" id="price" name="price" [(ngModel)]="book!.price">
+    </div>
+    <button type="button" id="btnValidAdd" class="btn btn-primary mb-3" (click)="editBook()">Valider</button>
+</form>

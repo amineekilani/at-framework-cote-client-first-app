@@ -4,29 +4,33 @@
 {
   <app-book-add [lastId]="books[books.length-1].id" (bookCreated)="addBook($event)"></app-book-add>
 }
+@if(action=="edit")
+{
+  <app-book-edit [book]="bookToEdit!" (bookEdited)="editBook($event)"></app-book-edit>
+}
 <table class="table table-striped">
-    <thead>
-      <tr class="table-dark">
-        <th scope="col">#</th>
-        <th scope="col">Titre</th>
-        <th scope="col">Auteur</th>
-        <th scope="col">Prix</th>
-        <th scope="col">Editer</th>
-        <th scope="col">Supprimer</th>
+  <thead>
+    <tr class="table-dark">
+      <th scope="col">#</th>
+      <th scope="col">Titre</th>
+      <th scope="col">Auteur</th>
+      <th scope="col">Prix</th>
+      <th scope="col">Editer</th>
+      <th scope="col">Supprimer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Directive ngFor (avant v17) ou @for (à partir de v17) -->
+    @for (book of books; track $index)
+    {
+      <tr>
+        <th scope="row">{{book.id}}</th>
+        <td>{{book.title}}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.price}}</td>
+        <td><button class="btn btn-primary" (click)="showEditForm(book)">Editer</button></td>
+        <td><button class="btn btn-danger" (click)="deleteBook(book.id)">Supprimer</button></td>
       </tr>
-    </thead>
-    <tbody>
-      <!-- Directive ngFor (avant v17) ou @for (à partir de v17) -->
-      @for (book of books; track $index)
-      {
-        <tr>
-          <th scope="row">{{book.id}}</th>
-          <td>{{book.title}}</td>
-          <td>{{book.author}}</td>
-          <td>{{book.price}}</td>
-          <td><button class="btn btn-primary">Editer</button></td>
-          <td><button class="btn btn-danger">Supprimer</button></td>
-        </tr>
-      }
-    </tbody>
+    }
+  </tbody>
 </table>
